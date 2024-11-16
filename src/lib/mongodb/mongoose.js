@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-let initialized = flase;
+let initialized = false;
 export const connect = async () => {
   mongoose.set("strictQuery", true);
   if (initialized) {
