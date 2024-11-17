@@ -10,7 +10,7 @@ export async function POST(request) {
     const response = await fetch("https://api.imgur.com/3/image", {
       method: "POST",
       headers: {
-        Authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
+        Authorization: `Client-ID ${CLIENT_ID}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ image: imageData.split(",")[1] }), // removes "data:image/*;base64,"
