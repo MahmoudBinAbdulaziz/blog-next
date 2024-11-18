@@ -4,30 +4,33 @@ import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { useTheme } from "next-themes";
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 import { dark, light } from "@clerk/themes";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 export default function Header() {
   const path = usePathname();
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const searchParams = useSearchParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //     const urlParams = new URLSearchParams(searchParams);
-    //     urlParams.set("searchTerm", searchTerm);
-    //     const searchQuery = urlParams.toString();
-    //     router.push(`/search?${searchQuery}`);
+    const urlParams = new URLSearchParams(searchParams);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    router.push(`/search?${searchQuery}`);
   };
 
-  //   useEffect(() => {
-  //     const urlParams = new URLSearchParams(searchParams);
-  //     const searchTermFromUrl = urlParams.get("searchTerm");
-  //     if (searchTermFromUrl) {
-  //       setSearchTerm(searchTermFromUrl);
-  //     }
-  //   }, [searchParams]);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(searchParams);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [searchParams]);
   return (
     <Navbar className="border-b-2">
       <Link
